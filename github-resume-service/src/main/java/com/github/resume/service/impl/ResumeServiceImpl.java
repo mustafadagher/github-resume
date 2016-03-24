@@ -5,6 +5,8 @@ package com.github.resume.service.impl;
 
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,18 +26,25 @@ import com.github.resume.service.ResumeService;
 @Service
 public class ResumeServiceImpl implements ResumeService {
 
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	private static final String NOT_FOUND = "Not Found";
 	private static final String MESSAGE = "message";
+
 	@Autowired
 	private ResumeDAO resumeDAO;
 
 	@Override
 	public Resume getResume(String url, String username) {
+		log.debug("ResumeServiceImpl:: getResume : start");
+		log.debug("User Name: " + username);
+
 		Resume resume = null;
 
+		log.debug("calling resumeDAO.getUser");
 		GithubUser user = resumeDAO.getUser(url, username);
 
 		if (user != null) {
+			log.debug("successfully obtained the github user info");
 			if (user.getAdditionalProperties() != null) {
 				Map<String, Object> props = user.getAdditionalProperties();
 				if (props.containsKey(MESSAGE)
@@ -48,6 +57,8 @@ public class ResumeServiceImpl implements ResumeService {
 			BeanUtils.copyProperties(user, resume);
 
 			GithubRepository[] repos = user.getRepos();
+
+			log.debug("user has {} repos", repos.length);
 
 			if (repos != null && repos.length > 0) {
 
@@ -75,8 +86,11 @@ public class ResumeServiceImpl implements ResumeService {
 				}
 			}
 		} else {
+			log.error("User Not Found");
 			throw new UserNotFoundException(NOT_FOUND);
 		}
+
+		log.debug("ResumeServiceImpl:: getResume : end");
 
 		return resume;
 	}

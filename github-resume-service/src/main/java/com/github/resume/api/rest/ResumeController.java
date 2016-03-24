@@ -5,6 +5,8 @@ package com.github.resume.api.rest;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -28,6 +30,7 @@ import com.github.resume.service.ResumeService;
 @RequestMapping("/resume")
 public class ResumeController {
 
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	private final String url = "https://api.github.com/users/";
 
 	@Autowired
@@ -37,8 +40,12 @@ public class ResumeController {
 	public @ResponseBody Resume loadResume(
 			@PathVariable("username") String username) {
 
+		log.debug("ResumeController:: loadResume : start");
+		log.debug("username: " + username);
+		
 		Resume resume = resumeService.getResume(url, username);
-
+		
+		log.debug("ResumeController:: loadResume : end");
 		return resume;
 	}
 
@@ -47,7 +54,7 @@ public class ResumeController {
 	public @ResponseBody RestError handleUserNotFoundException(
 			UserNotFoundException ex, WebRequest request,
 			HttpServletResponse response) {
-		//log.info("ResourceNotFoundException handler:" + ex.getMessage());
+		log.info("UserNotFoundException handler:" + ex.getMessage());
 
 		return new RestError(ex, "No user found for the given username!");
 	}
