@@ -27,8 +27,8 @@ import com.github.resume.service.ResumeService;
  *
  */
 @RestController
-@RequestMapping("/resume")
-public class ResumeController {
+@RequestMapping("/resumeAPI")
+public class ResumeAPI {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	private final String url = "https://api.github.com/users/";
@@ -40,12 +40,12 @@ public class ResumeController {
 	public @ResponseBody Resume loadResume(
 			@PathVariable("username") String username) {
 
-		log.debug("ResumeController:: loadResume : start");
+		log.debug("ResumeAPI:: loadResume : start");
 		log.debug("username: " + username);
 		
 		Resume resume = resumeService.getResume(url, username);
 		
-		log.debug("ResumeController:: loadResume : end");
+		log.debug("ResumeAPI:: loadResume : end");
 		return resume;
 	}
 

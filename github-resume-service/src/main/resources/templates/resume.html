@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Github Resume</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link
+	href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+	rel="stylesheet" media="screen" />
+<link href="../static/css/app.css" th:href="@{/css/app.css}"
+	rel="stylesheet" media="screen" />
+<script src="http://cdn.jsdelivr.net/webjars/jquery/2.2.1/jquery.min.js"
+	th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+    var username = [[${username}]];
+    console.log(username);
+
+/*]]>*/
+</script>
+
+<script src="../static/js/githubResume.js"
+	th:src="@{/js/githubResume.js}"></script>
+
+</head>
+<body>
+	<div id="wrapper">
+		<header role="banner">
+			<div class="yui-gc">
+				<div class="yui-u first">
+					<h1 class="fn" id="name"></h1>
+
+				</div>
+
+				<div class="yui-u">
+					<div class="contact-info">
+						<h3>
+							<a href="mailto:" class="email" id="email"></a>
+						</h3>
+					</div>
+					<!--// .contact-info -->
+				</div>
+			</div>
+		</header>
+		<article role="main">
+			<div class="yui-g">
+				<div class="yui-gf" id="mylanguages">
+					<div class="yui-u first">
+						<h2>Languages</h2>
+					</div>
+					<div class="yui-u" id="content-languages"></div>
+				</div>
+			</div>
+		</article>
+	</div>
+</body>
+</html>
