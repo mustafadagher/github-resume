@@ -19,6 +19,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.github.resume.domain.model.RestError;
 import com.github.resume.domain.model.Resume;
+import com.github.resume.exception.GithubApiLimitException;
 import com.github.resume.exception.UserNotFoundException;
 import com.github.resume.service.ResumeService;
 
@@ -42,9 +43,9 @@ public class ResumeAPI {
 
 		log.debug("ResumeAPI:: loadResume : start");
 		log.debug("username: " + username);
-		
+
 		Resume resume = resumeService.getResume(url, username);
-		
+
 		log.debug("ResumeAPI:: loadResume : end");
 		return resume;
 	}
@@ -57,6 +58,16 @@ public class ResumeAPI {
 		log.info("UserNotFoundException handler:" + ex.getMessage());
 
 		return new RestError(ex, "No user found for the given username!");
+	}
+
+	@ResponseStatus(HttpStatus.FORBIDDEN)
+	@ExceptionHandler(GithubApiLimitException.class)
+	public @ResponseBody RestError handleGithubApiLimitException(
+			GithubApiLimitException ex, WebRequest request,
+			HttpServletResponse response) {
+		log.info("GithubApiLimitException handler:" + ex.getMessage());
+
+		return new RestError(ex, "API Limit Exception");
 	}
 
 }

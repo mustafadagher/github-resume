@@ -1,23 +1,23 @@
 header {
-  margin: 2.5em 0 3em 0;
-  padding-bottom: 1.5em;
-  border-bottom: 1px solid #ccc;
+	margin: 2.5em 0 3em 0;
+	padding-bottom: 1.5em;
+	border-bottom: 1px solid #ccc;
 }
 
 header h1 {
-  font-size: 48px;
-  text-transform: uppercase;
-  letter-spacing: 3px;
+	font-size: 48px;
+	text-transform: uppercase;
+	letter-spacing: 3px;
 }
 
 header h2 {
-  text-transform: uppercase;
-  letter-spacing: 2px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
 }
 
 body {
-  font-family: Georgia, Garamond, "Times New Roman", Times, serif;
-  color: #444;
+	font-family: Georgia, Garamond, "Times New Roman", Times, serif;
+	color: #444;
 }
 
 #wrapper {
@@ -25,39 +25,49 @@ body {
 	width: 75%;
 }
 
-article,
-footer {  margin-bottom: 2em }
+article, footer {
+	margin-bottom: 2em
+}
 
 #username {
-  position: relative;
-  float: left;
-  height: 30px;
-  width: 75%;
-  border: 2px solid #444;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  font-family: Georgia, Garamond, "Times New Roman", Times, serif;
-  color: #444;
-  font-size: 18px;
-  padding: 5px;
+	position: relative;
+	float: left;
+	height: 30px;
+	width: 75%;
+	border: 2px solid #444;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	font-family: Georgia, Garamond, "Times New Roman", Times, serif;
+	color: #444;
+	font-size: 18px;
+	padding: 5px;
 }
 
 #gen {
-  position: relative;
-  float: left;
-  margin-left: 10px;
-  width: 20%;
-  height: 44px;
-  font-family: Georgia, Garamond, "Times New Roman", Times, serif;
-  font-size: 18px;
-  color: #fff;
-  background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0.21, rgb(31,31,31)), color-stop(0.61, rgb(51,51,51)) );
-  background-image: -moz-linear-gradient( center bottom, rgb(31,31,31) 21%, rgb(51,51,51) 61% );
-  border: 1px solid #444;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
+	position: relative;
+	float: left;
+	margin-left: 10px;
+	width: 20%;
+	height: 44px;
+	font-family: Georgia, Garamond, "Times New Roman", Times, serif;
+	font-size: 18px;
+	color: #fff;
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.21, rgb(31,
+		31, 31)), color-stop(0.61, rgb(51, 51, 51)));
+	background-image: -moz-linear-gradient(center bottom, rgb(31, 31, 31)
+		21%, rgb(51, 51, 51) 61%);
+	border: 1px solid #444;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
 }
 
-#gen:hover {  cursor: pointer }
+#gen:hover {
+	cursor: pointer
+}
+
+.error {
+	color: #e60000;
+	font-weight: bold;
+}

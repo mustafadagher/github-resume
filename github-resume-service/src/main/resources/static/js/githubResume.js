@@ -8,7 +8,14 @@ $(document).ready(function() {
 });
 
 var github_resume = function(username, callback) {
-	$.getJSON('/resumeAPI/' + username, callback);
+	$.getJSON('/resumeAPI/' + username, callback).fail(
+			function(event, jqxhr, exception) {
+				if (exception == 'Not Found') {
+					window.location = '/resume/error?code=404';
+				} else if (exception == 'Forbidden') {
+					window.location = '/resume/error?code=403';
+				}
+			});
 };
 
 fill_resume = function(data) {

@@ -16,7 +16,7 @@
 	$(document).ready(function() {
 		$('form#run').submit(function(e) {
 			var genUser = $('#username').val();
-			document.location = document.location.pathname + "/" + genUser;
+			document.location = "/resume/" + genUser;
 			e.preventDefault();
 		});
 	});
@@ -30,6 +30,7 @@
 		</header>
 		<article role="main">
 			<div class="yui-g">
+				<span class="error" th:if="${message != null}" th:text="${message}"></span>
 				<form id="run" action="." method="get">
 					<p>
 						<input id="username" type="text"

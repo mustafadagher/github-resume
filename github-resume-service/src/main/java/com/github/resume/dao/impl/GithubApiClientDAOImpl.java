@@ -5,6 +5,7 @@ package com.github.resume.dao.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -12,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import com.github.resume.dao.ResumeDAO;
 import com.github.resume.domain.entity.GithubRepository;
 import com.github.resume.domain.entity.GithubUser;
+import com.github.resume.exception.GithubApiLimitException;
 import com.github.resume.exception.UserNotFoundException;
 
 /**
@@ -63,17 +65,22 @@ public class GithubApiClientDAOImpl implements ResumeDAO {
 		try {
 			user = getRestTemplate().getForObject(userURL, GithubUser.class);
 			log.debug("user info obtained successfully.");
-			
+
 			if (user != null && !user.getReposUrl().isEmpty()) {
 				log.debug("getting user repos");
 				user.setRepos(getRepos(user.getReposUrl()));
 			}
 
 		} catch (HttpClientErrorException hce) {
-			log.error("failed to get user", hce);
-			throw new UserNotFoundException(hce.getMessage());
+			if (hce.getStatusCode().equals(HttpStatus.NOT_FOUND)) {
+				log.error("failed to get user", hce);
+				throw new UserNotFoundException(hce.getMessage());
+			} else if (hce.getStatusCode().equals(HttpStatus.FORBIDDEN)) {
+				log.error("API LIMIT", hce);
+				throw new GithubApiLimitException(hce.getMessage());
+			}
 		}
-		
+
 		log.debug("GithubApiClientDAOImpl:: getUser : end");
 		return user;
 	}
