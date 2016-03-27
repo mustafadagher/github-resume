@@ -8,7 +8,7 @@ $(document).ready(function() {
 });
 
 var github_resume = function(username, callback) {
-	$.getJSON('/resumeAPI/' + username, callback).fail(
+	$.getJSON('http://localhost:8090/resumeAPI/' + username, callback).fail(
 			function(event, jqxhr, exception) {
 				if (exception == 'Not Found') {
 					window.location = '/resume/error?code=404';
