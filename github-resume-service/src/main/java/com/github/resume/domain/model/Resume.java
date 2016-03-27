@@ -3,6 +3,9 @@
  */
 package com.github.resume.domain.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,9 +13,12 @@ import java.util.Map;
  * @author Mustafa Dagher
  *
  */
+@ApiModel
 public class Resume {
 
+	@ApiModelProperty(notes = "The full name of the user")
 	private String name;
+
 	private String company;
 	private String blog;
 	private String location;
@@ -20,7 +26,9 @@ public class Resume {
 	private String bio;
 
 	private long reposCount;
-	private Map<String, Language> languages = new HashMap<String, Language>();
+
+	@ApiModelProperty(notes = "A map for the programming languages user uses in his github repos", dataType = "Map[string,com.github.resume.domain.model.Language]")
+	private Map<String, Language> languages;
 
 	public String getName() {
 		return name;
@@ -79,6 +87,8 @@ public class Resume {
 	}
 
 	public Map<String, Language> getLanguages() {
+		if (languages == null)
+			languages = new HashMap<String, Language>();
 		return languages;
 	}
 

@@ -3,6 +3,13 @@
  */
 package com.github.resume.api.rest;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -13,6 +20,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +38,7 @@ import com.github.resume.service.ResumeService;
  */
 @RestController
 @RequestMapping("/resumeAPI")
+@Api(value = "resumeAPI")
 public class ResumeAPI {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -38,8 +47,16 @@ public class ResumeAPI {
 	@Autowired
 	private ResumeService resumeService;
 
+	@ApiOperation(value = "generates the Resume from the github account with the given username", nickname = "loadResume", notes = "You have to provide a valid github account username", responseContainer = "Map")
+	@ApiImplicitParams({ @ApiImplicitParam(name = "username", value = "Github Account User Name", required = true, dataType = "string", paramType = "path", defaultValue = "mustafadagher") })
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Success", response = Resume.class, responseContainer = "Map"),
+			@ApiResponse(code = 401, message = "Unauthorized"),
+			@ApiResponse(code = 403, message = "API Limit Exception"),
+			@ApiResponse(code = 404, message = "User Not Found Exception"),
+			@ApiResponse(code = 500, message = "Failure") })
 	@CrossOrigin(origins = "*")
-	@RequestMapping("/{username}")
+	@RequestMapping(value = "/{username}", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody Resume loadResume(
 			@PathVariable("username") String username) {
 
