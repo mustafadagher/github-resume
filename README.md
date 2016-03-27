@@ -13,6 +13,9 @@ https://github.com/resume/resume.github.com
 * You may use the API through pointing to "/resumeAPI/{username}"
 * to use the web client run it on a tomcat server or as a spring boot app, it starts on [localhost:8080](Link URL), point to "/resume" and use it. 
 
+### Swagger API Documentation ###
+
+you may check swagger documentation after running the service at http://localhost:8090/swagger-ui.html
 ### Author ###
 
 * Mustafa Dagher (dagher.mustafa@gmail.com)
