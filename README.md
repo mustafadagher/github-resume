@@ -16,6 +16,7 @@ https://github.com/resume/resume.github.com
 ### Swagger API Documentation ###
 
 you may check swagger documentation after running the service at http://localhost:8090/swagger-ui.html
+
 ### Author ###
 
 * Mustafa Dagher (dagher.mustafa@gmail.com)
