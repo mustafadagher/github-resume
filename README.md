@@ -5,7 +5,7 @@ This project is a Spring Boot service that creates your resume based on your Git
 * Created based on the [resume.github.com](Link URL) project
 https://github.com/resume/resume.github.com
 
-* The Repository contains to Spring Boot projects, one for the REST API (github-resume-service), and the other is a web client that consumers the REST API (github-resume-client)
+* The Repository contains two Spring Boot projects, one for the REST API (github-resume-service), and the other is a web client that consumers the REST API (github-resume-client)
 
 ### Using it ###
 
